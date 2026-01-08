@@ -170,15 +170,24 @@ function moveApp(app, loc) {
         if (loc.height === rowCount && loc.width === colCount) {
             // Maximize
             _log('moveApp) maximize');
-            app.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+            if (SHELL_VERSION >= 49.0)
+                app.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+            else
+                app.maximize();
         } else if (loc.height === rowCount && !config.gap) {
             // Maximize vertically
             _log('moveApp) maximize - v');
-            app.maximize(Meta.MaximizeFlags.VERTICAL);
+            if (SHELL_VERSION >= 49.0)
+                app.maximize(Meta.MaximizeFlags.VERTICAL);
+            else
+                app.maximize();
         } else if (loc.width === colCount && !config.gap) {
             // Maximize horizontally
             _log('moveApp) maximize - h');
-            app.maximize(Meta.MaximizeFlags.HORIZONTAL);
+            if (SHELL_VERSION >= 49.0)
+                app.maximize(Meta.MaximizeFlags.HORIZONTAL);
+            else
+                app.maximize();
         }
     }
 
@@ -211,7 +220,10 @@ function moveApp(app, loc) {
  */
 function unMaximizeIfMaximized(app) {
     if (app.maximized_horizontally || app.maximized_vertically)
-        app.unmaximize(Meta.MaximizeFlags.BOTH);
+        if (SHELL_VERSION >= 49.0)
+            app.unmaximize(Meta.MaximizeFlags.BOTH);
+        else
+            app.unmaximize();
 }
 
 /**
