@@ -171,7 +171,8 @@ function moveApp(app, loc) {
             // Maximize
             _log('moveApp) maximize');
             if (SHELL_VERSION >= 49.0) {
-                app.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+                app.maximize();
+                app.set_maximize_flags(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
             } else
                 app.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
         } else if (loc.height === rowCount && !config.gap) {
@@ -179,7 +180,7 @@ function moveApp(app, loc) {
             _log('moveApp) maximize - v');
             if (SHELL_VERSION >= 49.0) {
                 app.maximize();
-                app.maximize(Meta.MaximizeFlags.VERTICAL);
+                app.set_maximize_flags(Meta.MaximizeFlags.VERTICAL);
             } else
                 app.maximize(Meta.MaximizeFlags.VERTICAL);
         } else if (loc.width === colCount && !config.gap) {
@@ -187,7 +188,7 @@ function moveApp(app, loc) {
             _log('moveApp) maximize - h');
             if (SHELL_VERSION >= 49.0) {
                 app.maximize();
-                app.maximize(Meta.MaximizeFlags.HORIZONTAL);
+                app.set_maximize_flags(Meta.MaximizeFlags.HORIZONTAL);
             } else
                 app.maximize(Meta.MaximizeFlags.HORIZONTAL);
         }
